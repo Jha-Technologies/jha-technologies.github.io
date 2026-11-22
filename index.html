@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jha Technologies | Neuromorphic AGI, SDKs & Autonomous Robotics</title>
+    <style>
+        :root {
+            --bg-dark: #060913;
+            --bg-card: #0f1626;
+            --bg-card-hover: #162038;
+            --accent-cyan: #00f0ff;
+            --accent-purple: #7b2cbf;
+            --text-main: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border-color: #1e293b;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(6, 9, 19, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            color: var(--text-main);
+        }
+        .logo span {
+            color: var(--accent-cyan);
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: var(--accent-cyan);
+        }
+        .hero {
+            padding: 10rem 5% 6rem;
+            text-align: center;
+            background: radial-gradient(circle at top, rgba(0, 240, 255, 0.08), transparent 60%);
+        }
+        .badge {
+            display: inline-block;
+            padding: 0.35rem 1rem;
+            border-radius: 50px;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            color: var(--accent-cyan);
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            max-width: 900px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.2;
+        }
+        .hero h1 span {
+            background: linear-gradient(90deg, var(--accent-cyan), #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero p {
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            font-size: 1.15rem;
+        }
+        .terminal-box {
+            display: inline-flex;
+            align-items: center;
+            background: #02040a;
+            border: 1px solid var(--border-color);
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            color: var(--accent-cyan);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        .copy-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: 0.2s;
+        }
+        .copy-btn:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+        section {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .section-header {
+            margin-bottom: 3rem;
+        }
+        .section-header h2 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+        .section-header p {
+            color: var(--text-muted);
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 1.5rem;
+        }
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 240, 255, 0.4);
+            background: var(--bg-card-hover);
+        }
+        .card-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-cyan);
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            display: block;
+        }
+        .card h3 {
+            font-size: 1.35rem;
+            margin-bottom: 0.8rem;
+        }
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+        }
+        .code-pill {
+            display: inline-block;
+            background: #02040a;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #38bdf8;
+            border: 1px solid #1e293b;
+        }
+        .btn-outline {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            border: 1px solid var(--accent-cyan);
+            color: var(--accent-cyan);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn-outline:hover {
+            background: var(--accent-cyan);
+            color: var(--bg-dark);
+        }
+        .ip-box {
+            background: linear-gradient(135deg, rgba(123, 44, 191, 0.15), rgba(0, 240, 255, 0.1));
+            border: 1px solid rgba(0, 240, 255, 0.3);
+            border-radius: 12px;
+            padding: 2.5rem;
+            margin-top: 2rem;
+        }
+        footer {
+            border-top: 1px solid var(--border-color);
+            padding: 3rem 5%;
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .nav-links { display: none; }
+            .grid-2 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">JHA <span>TECHNOLOGIES</span></div>
+        <ul class="nav-links">
+            <li><a href="#sdks">Core SDKs</a></li>
+            <li><a href="#saas">SaaS & Agencies</a></li>
+            <li><a href="#hardware">Hardware & Robotics</a></li>
+            <li><a href="#research">Research & IP</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <header class="hero">
+        <div class="badge">BRAIN-INSPIRED COMPUTING &bull; CONTINUAL LEARNING &bull; AUTONOMOUS SYSTEMS</div>
+        <h1>Building Self-Evolving AI &amp; <span>Ultra-Low-Energy Robotics</span></h1>
+        <p>Founded by Shrishant Jha. We engineer continual-learning Python SDKs, enterprise AI software, and wave-sensing neuromorphic hardware inspired by human neurobiology.</p>
+        <div class="terminal-box">
+            <span id="pip-cmd">$ pip install jt-continual</span>
+            <button class="copy-btn" onclick="copyCmd()">Copy</button>
+        </div>
+    </header>
+
+    <section id="sdks">
+        <div class="section-header">
+            <h2>01. JT Core SDKs (Developer Libraries)</h2>
+            <p>Lightweight, neuromorphic Python libraries designed to eliminate catastrophic forgetting and excessive compute costs.</p>
+        </div>
+        <div class="grid-3">
+            <div class="card">
+                <span class="card-tag">Chatbot &amp; LLM Memory</span>
+                <h3>jt-memory</h3>
+                <p>Solves catastrophic forgetting and memory bloat in AI chatbots using our Importance Gate formula (|Expected &minus; Actual| &times; Emotional Intensity) and automated offline sleep pruning.</p>
+                <div class="code-pill">pip install jt-memory</div>
+            </div>
+            <div class="card">
+                <span class="card-tag">Autonomous AGI Agents</span>
+                <h3>jt-continual</h3>
+                <p>Enables AI agents to learn organically from changing environments without static retraining, using dynamic neurogenesis, artificial homeostasis, and immutable safety guardrails.</p>
+                <div class="code-pill">pip install jt-continual</div>
+            </div>
+            <div class="card">
+                <span class="card-tag">Vision &amp; Sensor Edge AI</span>
+                <h3>jt-wavesense</h3>
+                <p>Event-driven perception library for cameras and sensors. Remains dormant at near-zero power until wave anomalies or unexpected movements trigger short- and long-term memory consolidation.</p>
+                <div class="code-pill">pip install jt-wavesense</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="saas">
+        <div class="section-header">
+            <h2>02. JT SaaS &amp; Digital Agencies</h2>
+            <p>Applied artificial intelligence software and full-stack digital growth solutions powered by JT's proprietary memory engines.</p>
+        </div>
+               <div class="grid-2">
+            <div class="card">
+                <span class="card-tag">FinTech AI SaaS</span>
+                <h3>JT Accountant AI</h3>
+                <p>An intelligent financial assistant built on <strong>jt-memory</strong>. Continuously learns business cashflow patterns, audits invoices, tracks anomalies, and manages financial records with zero context loss.</p>
+                <a href="#contact" class="btn-outline">Request Early Access</a>
+            </div>
+            <div class="card">
+                <span class="card-tag">B2B Growth &amp; Web Studio</span>
+                <h3>JT Digital &amp; AI Agency</h3>
+                <p>End-to-end business launchpad offering high-converting websites, AI chatbot integration, automated ad campaigns, and custom Python workflow engineering for startups and enterprises.</p>
+                <a href="#contact" class="btn-outline">Start a Project</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="hardware">
+        <div class="section-header">
+            <h2>03. JT Hardware &amp; Autonomous Robotics</h2>
+            <p>Next-generation physical intelligence uniting event-driven silicon with non-visual wave perception (2026&ndash;2028 Roadmap).</p>
+        </div>
+        <div class="grid-3">
+            <div class="card">
+                <span class="card-tag">Neuromorphic Silicon</span>
+                <h3>JT Subtle Chips</h3>
+                <p>Event-driven spiking neural processors utilizing in-memory computing to eliminate RAM-CPU bottlenecks and operate on milli-watt power budgets.</p>
+            </div>
+            <div class="card">
+                <span class="card-tag">Stealth Exploration</span>
+                <h3>Wave-Sensing Drones</h3>
+                <p>Autonomous aerial and underwater vehicles using acoustic/radio wave perception and Inattentional Blindness camouflage for dark, uncharted environments.</p>
+            </div>
+            <div class="card">
+                <span class="card-tag">Smart Edge Optics</span>
+                <h3>Event-Triggered Cameras</h3>
+                <p>Ultra-low-power security and industrial cameras that sleep during static scenes and wake instantly upon detecting Out-of-Distribution anomalies.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="research">
+        <div class="section-header">
+            <h2>04. JT Research Labs &amp; IP Licensing</h2>
+            <p>Foundational research papers by Shrishant Jha driving the next era of sustainable Artificial General Intelligence.</p>
+        </div>
+        <div class="grid-2">
+            <div class="card">
+                <span class="card-tag">Research Paper &bull; Nov 2026</span>
+                <h3>Emotion-Guided, Low-Energy Continual Learning Architecture for AGI</h3>
+                <p>Introduces dynamic neurogenesis, artificial homeostasis (pain/reward signals), prediction-error Importance Gates, and immutable safety guardrails.</p>
+                <a href="https://github.com" target="_blank" class="btn-outline">View Paper &amp; Code</a>
+            </div>
+            <div class="card">
+                <span class="card-tag">Research Paper &bull; Nov 2026</span>
+                <h3>Cognitive Camouflage &amp; Wave-Sensing Neuromorphic AGI</h3>
+                <p>Unifies non-visual acoustic/radio wave sensing, Inattentional Blindness stealth, and curiosity-driven continual learning for deep-sea and extreme exploration.</p>
+                <a href="https://github.com" target="_blank" class="btn-outline">View Paper &amp; Code</a>
+            </div>
+        </div>
+
+        <div class="ip-box">
+            <h3>Open-Science Attribution &amp; Commercial Licensing Policy</h3>
+            <p style="color: var(--text-muted); margin-top: 0.8rem;">
+                All research papers and open-source prototypes published by <strong>Jha Technologies</strong> are protected under <strong>AGPL-3.0 / CC BY-NC-SA 4.0</strong>. Academic researchers and students are welcome to study and cite our work with proper credit to <em>Shrishant Jha (Jha Technologies)</em>. Any commercial product, software, or hardware built using our architectures requires a <strong>JT Commercial License &amp; Revenue-Share Agreement</strong>.
+            </p>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <h3 style="color: var(--text-main); margin-bottom: 0.5rem;">JHA TECHNOLOGIES</h3>
+        <p>Founded by Shrishant Jha &bull; India</p>
+        <p style="margin-top: 0.5rem;">
+            GitHub: <a href="https://github.com" target="_blank" style="color: var(--accent-cyan);">://github.com</a> | 
+            Portfolio: <a href="https://github.io" target="_blank" style="color: var(--accent-cyan);">Founder Profile</a>
+        </p>
+        <p style="margin-top: 1.5rem; font-size: 0.8rem;">&copy; 2026 Jha Technologies. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        function copyCmd() {
+            navigator.clipboard.writeText("pip install jt-continual");
+            const btn = document.querySelector(".copy-btn");
+            btn.innerText = "Copied!";
+            setTimeout(() => { btn.innerText = "Copy"; }, 2000);
+        }
+    </script>
+</body>
+</html>
+
+
